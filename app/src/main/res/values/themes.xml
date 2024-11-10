@@ -1,0 +1,18 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.MyLoggin" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorAzul</item>
+        <item name="colorPrimaryVariant">@color/colorAzulsuave</item>
+        <item name="colorSecondary">@color/colorAzulsuave</item>
+
+    </style>
+
+    <style name="SplashTheme" parent="Theme.MyLoggin">
+        <item name="android:windowBackground">@drawable/splashscreen</item>
+    </style>
+    <!-- Base application theme. -->
+    <style name="Base.Theme.MyLoggin" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+</resources>

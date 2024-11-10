@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "146662901471",
+    "firebase_url": "https://quickpay-f9e40-default-rtdb.firebaseio.com",
+    "project_id": "quickpay-f9e40",
+    "storage_bucket": "quickpay-f9e40.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:146662901471:android:2a844d78fa691454d84b6a",
+        "android_client_info": {
+          "package_name": "programacionmovil.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm0g2mbotEVLfX1DWyW2Vb6x-G_BhqW3w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
