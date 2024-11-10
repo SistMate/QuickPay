@@ -6,6 +6,12 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="nameuser">Julio peralta : 1023kfv</string>
+    <string name="money_balance">403.30 Bs</string>
+
+    <string name="transaction_name">Transporte Público</string>
+
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus

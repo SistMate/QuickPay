@@ -3,6 +3,7 @@ package programacionmovil.com
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -17,6 +18,10 @@ class HomePageP : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
+    private lateinit var imageViewHome: ImageView
+    private lateinit var imageViewPagar: ImageView
+    private lateinit var imageViewTransaction: ImageView
+    private lateinit var imageViewSettings: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +51,28 @@ class HomePageP : AppCompatActivity() {
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
+        }
+
+        // Inicializar los ImageViews
+        imageViewHome = findViewById(R.id.imageView2)
+        imageViewPagar = findViewById(R.id.imageViewPagar)
+        imageViewTransaction = findViewById(R.id.imageViewTransaction)
+        imageViewSettings = findViewById(R.id.imageViewSettings)
+// Configurar listeners de los ImageViews
+        imageViewHome.setOnClickListener {
+            startActivity(Intent(this, HomePageA::class.java))
+        }
+
+        imageViewPagar.setOnClickListener {
+            startActivity(Intent(this, PagarActivity::class.java))
+        }
+
+        imageViewTransaction.setOnClickListener {
+            startActivity(Intent(this, TransactionActivity::class.java))
+        }
+
+        imageViewSettings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
 
         // Callback para el botón "Atrás"

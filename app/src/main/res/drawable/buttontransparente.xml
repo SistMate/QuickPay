@@ -6,7 +6,8 @@
     <solid android:color="@android:color/transparent"/>
     <stroke
         android:width="2dp"
-        android:color="@color/colorAzul"/>
+
+        android:color="#19548E"/>
     <corners android:radius="5dp"/>
 
     <corners android:radius="20dp"/>

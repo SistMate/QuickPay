@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLoggin"
         tools:targetApi="31">
+        <activity
+            android:name=".CobrarActivity"
+            android:exported="false" />
         <activity
             android:name=".HomePageA"
             android:exported="false" />
@@ -23,6 +29,12 @@
             android:name=".HomePageP"
             android:exported="false" />
         <activity
+            android:name=".PagarActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TransactionActivity"
+            android:exported="false" />
+        <activity
             android:name=".Registro_pasajero"
             android:exported="false" />
         <activity
@@ -30,10 +42,9 @@
             android:exported="false" />
         <activity
             android:name=".Elecciondeformulario"
-            android:exported="false" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".RegisterActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".MainActivity"
             android:exported="true"

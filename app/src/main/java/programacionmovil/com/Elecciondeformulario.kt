@@ -20,6 +20,7 @@ class Elecciondeformulario : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
         val tvGoIniciarSesion = findViewById<ImageView>(R.id.iv_back)
         tvGoIniciarSesion.setOnClickListener{
             goToIniciarSesion()
@@ -38,7 +39,6 @@ class Elecciondeformulario : AppCompatActivity() {
 
         val i = Intent(this, MainActivity::class.java)
         startActivity(i)
-
     }
     private fun goToRegistroPasajero(){
 
@@ -52,4 +52,5 @@ class Elecciondeformulario : AppCompatActivity() {
         startActivity(i)
 
     }
+
     }

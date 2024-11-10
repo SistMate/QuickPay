@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-class HomePageC : AppCompatActivity() {
+class PagarActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
@@ -26,7 +26,7 @@ class HomePageC : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home_page_c)
+        setContentView(R.layout.activity_pagar)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -64,15 +64,15 @@ class HomePageC : AppCompatActivity() {
         }
 
         imageViewPagar.setOnClickListener {
-            startActivity(Intent(this, PagarActivity::class.java))
+            startActivity(Intent(this, HomePageP::class.java))
         }
 
         imageViewTransaction.setOnClickListener {
-            startActivity(Intent(this, TransactionActivity::class.java))
+            startActivity(Intent(this, HomePageC::class.java))
         }
 
         imageViewSettings.setOnClickListener {
-            startActivity(Intent(this, SettingsActivity::class.java))
+            startActivity(Intent(this, HomePageA::class.java))
         }
 
         // Callback para el botón "Atrás"
