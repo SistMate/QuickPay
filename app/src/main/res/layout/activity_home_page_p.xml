@@ -66,8 +66,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        app:srcCompat="@drawable/home" />
+                        android:layout_marginTop="8dp" />
+
 
                     <TextView
                         android:id="@+id/textView"
@@ -91,8 +91,8 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/white"
-                        app:srcCompat="@drawable/home" />
+                        android:textColor="@color/white"/>
+
 
                     <TextView
                         android:id="@+id/textViewPagar"
@@ -116,8 +116,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        app:srcCompat="@drawable/home" />
+                        android:layout_marginTop="8dp"/>
+
 
                     <TextView
                         android:id="@+id/textView1"
@@ -139,8 +139,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        app:srcCompat="@drawable/home" />
+                        android:layout_marginTop="8dp"/>
+
 
                     <TextView
                         android:id="@+id/textViewTansaction"
@@ -163,8 +163,8 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        app:srcCompat="@drawable/home" />
+                        android:layout_marginTop="8dp"/>
+
 
                     <TextView
                         android:id="@+id/textViewSettings"

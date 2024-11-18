@@ -21,6 +21,8 @@ class Elecciondeformulario : AppCompatActivity() {
             insets
         }
 
+
+
         val tvGoIniciarSesion = findViewById<ImageView>(R.id.iv_back)
         tvGoIniciarSesion.setOnClickListener{
             goToIniciarSesion()
@@ -52,5 +54,6 @@ class Elecciondeformulario : AppCompatActivity() {
         startActivity(i)
 
     }
+
 
     }

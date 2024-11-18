@@ -2,6 +2,7 @@ package programacionmovil.com
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Looper
 import android.text.InputType
 import android.util.Patterns
 import android.widget.Button
@@ -17,6 +18,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
 import com.google.firebase.database.*
+import android.os.Handler
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,9 +33,14 @@ class MainActivity : AppCompatActivity() {
     private var isPasswordVisible: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Thread.sleep(8000)
-        setTheme(R.style.Theme_MyLoggin)
+
         super.onCreate(savedInstanceState)
+        // Retraso para aplicar el tema después de 8 segundos
+        Handler(Looper.getMainLooper()).postDelayed({
+            setTheme(R.style.Theme_MyLoggin)
+        }, 10000)
+
+        setTheme(R.style.Theme_MyLoggin)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 

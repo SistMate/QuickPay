@@ -131,8 +131,8 @@ class Registro_pasajero : AppCompatActivity() {
             Toast.makeText(this, "El nombre debe tener entre 8 y 50 caracteres", Toast.LENGTH_SHORT).show()
             return false
         }
-        if (ci.length != 8) {
-            Toast.makeText(this, "El CI debe tener exactamente 8 caracteres", Toast.LENGTH_SHORT).show()
+        if (ci.length != 7 && ci.length != 8) {
+            Toast.makeText(this, "El CI debe tener exactamente 7 0 8 caracteres", Toast.LENGTH_SHORT).show()
             return false
         }
         if (fechaNacimiento.isEmpty()) {

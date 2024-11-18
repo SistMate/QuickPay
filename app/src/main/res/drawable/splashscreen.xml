@@ -3,9 +3,8 @@
     <item android:drawable="@color/colorAzulsuave"/>
     <item>
         <bitmap
-            android:src="@mipmap/logo"
-            android:gravity="center"
-            android:width="50dp"
-        android:height="50dp"/>
+            android:src="@drawable/portadainicio"
+            android:gravity="fill"/>
     </item>
 </layer-list>
+
