@@ -5,16 +5,29 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:hardwareAccelerated="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyLoggin"
         tools:targetApi="31">
+        <activity
+            android:name=".Pagar_Pasajero"
+            android:exported="false" />
+        <activity
+            android:name=".Transacciones_Pasajero"
+            android:exported="false" />
+        <activity
+            android:name=".Transaccion_Pasajero"
+            android:exported="false"
+            android:theme="@style/Theme.MyLoggin" />
+        <activity
+            android:name=".ajustes_pasajero"
+            android:exported="false" />
         <activity
             android:name=".CobrarActivity"
             android:exported="false" />
@@ -24,10 +37,11 @@
         <activity
             android:name=".HomePageC"
             android:exported="false"
-            android:theme="@style/Theme.MyLoggin" />
+            android:theme="@style/Theme.MyLoggin" /> <!-- Corrección aquí: Elimina la segunda declaración de HomePageP -->
         <activity
             android:name=".HomePageP"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".PagarActivity"
             android:exported="false" />
@@ -42,9 +56,7 @@
             android:exported="false" />
         <activity
             android:name=".Elecciondeformulario"
-            android:exported="false" /> <!-- <activity -->
-        <!-- android:name=".RegisterActivity" -->
-        <!-- android:exported="false" /> -->
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -17,7 +17,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class HomePageP : AppCompatActivity() {
+class Pagar_Pasajero : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
 
@@ -26,7 +26,7 @@ class HomePageP : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home_page_p)
+        setContentView(R.layout.activity_pagar_pasajero)
 
         // Configuración para ajustar la visualización con el borde de la pantalla
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -64,14 +64,15 @@ class HomePageP : AppCompatActivity() {
         tvGoAjustes.setOnClickListener{
             goToAjustes()
         }
+        val tvGoHome = findViewById<ImageView>(R.id.imageHome)
+        tvGoHome.setOnClickListener{
+            goToHome()
+        }
         val tvGoTransacciones = findViewById<ImageView>(R.id.imageViewTransaction)
         tvGoTransacciones.setOnClickListener{
-            goToTransacciones()
+            goToTransaccion()
         }
-        val tvGoPagar = findViewById<ImageView>(R.id.imageViewPagar)
-        tvGoPagar.setOnClickListener{
-            goToPagar()
-        }
+
     }
 
     private fun getUserName() {
@@ -114,14 +115,19 @@ class HomePageP : AppCompatActivity() {
         val i = Intent(this, ajustes_pasajero::class.java)
         startActivity(i)
     }
-    private fun goToTransacciones(){
+    private fun goToHome(){
+
+        val i = Intent(this, HomePageP::class.java)
+        startActivity(i)
+    }
+    private fun goToTransaccion(){
 
         val i = Intent(this, Transacciones_Pasajero::class.java)
         startActivity(i)
     }
-    private fun goToPagar(){
 
-        val i = Intent(this, Pagar_Pasajero::class.java)
-        startActivity(i)
-    }
+
+
 }
+
+
