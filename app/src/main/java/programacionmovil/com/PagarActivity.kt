@@ -53,7 +53,7 @@ class PagarActivity : AppCompatActivity() {
             startActivity(intent)
         }
         // Inicializar los ImageViews
-        imageViewHome = findViewById(R.id.imageView2)
+        imageViewHome = findViewById(R.id.imageHome)
         imageViewPagar = findViewById(R.id.imageViewPagar)
         imageViewTransaction = findViewById(R.id.imageViewTransaction)
         imageViewSettings = findViewById(R.id.imageViewSettings)

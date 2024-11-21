@@ -20,6 +20,8 @@ import com.google.firebase.database.ValueEventListener
 class HomePageP : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
+    private lateinit var tvMonto: TextView
+    private lateinit var tvPuntos: TextView
 
     private lateinit var tvHeader: TextView
 
@@ -37,9 +39,13 @@ class HomePageP : AppCompatActivity() {
 
         // Inicializa el TextView que mostrará el nombre del usuario
         tvHeader = findViewById(R.id.tvHeader)
+        tvMonto = findViewById(R.id.tvMonto) // Asocia el TextView de monto
+        tvPuntos = findViewById(R.id.tvPuntos)
 
         // Llamar a la función para obtener el nombre del usuario desde Firebase
         getUserName()
+        getUserData()
+
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
@@ -51,14 +57,9 @@ class HomePageP : AppCompatActivity() {
             startActivity(intent)
         }
 
-// Botón de Cerrar Sesión
-        val btnLogout = findViewById<Button>(R.id.btnLogout)
-        btnLogout.setOnClickListener {
-            mAuth.signOut()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-
+        val tvGoHome = findViewById<ImageView>(R.id.imageHome)
+        tvGoHome.setOnClickListener{
+            goToHome()
         }
         val tvGoAjustes = findViewById<ImageView>(R.id.imageViewSettings)
         tvGoAjustes.setOnClickListener{
@@ -100,6 +101,34 @@ class HomePageP : AppCompatActivity() {
         }
     }
 
+    private fun getUserData() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val myRef: DatabaseReference = database.getReference("Users")
+            val userId = user.uid
+
+            myRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // Recupera los datos de crédito y puntos acumulados
+                    val monto = dataSnapshot.child("monto").getValue(Int::class.java) ?: 0
+                    val puntos = dataSnapshot.child("puntosAcumulados").getValue(Int::class.java) ?: 0
+
+                    // Actualiza los TextView con los valores obtenidos
+                    tvMonto.text = "$monto Bs."
+                    tvPuntos.text = "$puntos Pts." // Añadir " Pts." al final de los puntos
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    showAlert("Error al obtener los datos del usuario: ${databaseError.message}")
+                }
+            })
+        } else {
+            showAlert("Usuario no autenticado")
+        }
+    }
+
+
     // Método para mostrar alertas en caso de error
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(this)
@@ -108,6 +137,10 @@ class HomePageP : AppCompatActivity() {
         builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
+    }
+    private fun goToHome(){
+        val i = Intent(this, HomePageP::class.java)
+        startActivity(i)
     }
     private fun goToAjustes(){
 

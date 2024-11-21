@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".Registro_conductor"
     android:orientation="vertical"
-    android:background="@color/colorAzulsuave">
+    android:background="@color/FondoHome">
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="0dp"
