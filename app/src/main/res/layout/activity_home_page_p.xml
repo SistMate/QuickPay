@@ -52,69 +52,67 @@
                 android:textColor="#19548E"
                 android:gravity="center"
                 android:textSize="16sp"
-                android:layout_marginEnd="55dp" /> <!-- Espacio entre el texto y el cuadro -->
+                android:layout_marginEnd="55dp" />
 
             <!-- Cuadro para el monto -->
             <LinearLayout
                 android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:background="@drawable/white_box">
+
+                <TextView
+                    android:id="@+id/tvMontoTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 Bs."
+                    android:textStyle="bold"
+                    android:textColor="#19548E"
+                    android:textSize="18sp"
+                    android:gravity="center" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Puntos Acumulados -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="8dp"
-            android:background="@drawable/white_box">
+            android:orientation="horizontal"
+            android:gravity="center_vertical|center_horizontal">
 
             <TextView
-                android:id="@+id/tvMonto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0 Bs."
+                android:text="Puntos Acumulados:"
                 android:textStyle="bold"
                 android:textColor="#19548E"
-                android:textSize="18sp"
-                android:gravity="center" />
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginEnd="16dp" />
+
+
+            <LinearLayout
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:background="@drawable/white_box">
+
+                <TextView
+                    android:id="@+id/tvPuntos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0 Pts."
+                    android:textStyle="bold"
+                    android:textColor="#19548E"
+                    android:textSize="18sp"
+                    android:gravity="center" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <!-- Puntos Acumulados -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical|center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Puntos Acumulados:"
-            android:textStyle="bold"
-            android:textColor="#19548E"
-            android:gravity="center"
-            android:textSize="16sp"
-            android:layout_marginEnd="16dp" />
-
-        <!-- Cuadro para los puntos -->
-        <LinearLayout
-            android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:padding="8dp"
-        android:background="@drawable/white_box">
-
-        <TextView
-            android:id="@+id/tvPuntos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:text="0 Pts."
-            android:textColor="#19548E"
-            android:textSize="18sp"
-            android:gravity="center" />
-    </LinearLayout>
-</LinearLayout>
-
-    </LinearLayout>
-
-
-    <!-- Últimas Transacciones -->
     <TextView
         android:id="@+id/tvUltimasTransacciones"
         android:layout_width="match_parent"
@@ -129,7 +127,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Primer cuadro -->
+
+
     <LinearLayout
         android:id="@+id/transactionBox1"
         android:layout_width="0dp"
@@ -150,12 +149,13 @@
         <ImageView
             android:layout_width="55dp"
             android:layout_height="20dp"
+            android:id="@+id/icon1"
             android:layout_marginEnd="8dp"
             android:contentDescription="Icono de transporte público"
             android:src="@drawable/user"
             app:tint="#19548E" />
 
-        <!-- Texto -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -166,6 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TRANSPORTE PÚBLICO"
+                android:id="@+id/tvDescripcion1"
                 android:textColor="#19548E"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -181,6 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18/11/2024 14:35"
+                android:id="@+id/tvFecha1"
                 android:textColor="#19548E"
                 android:textSize="12sp"
                 android:layout_marginTop="4dp" />
@@ -191,6 +193,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2.00 Bs"
+            android:id="@+id/tvMonto1"
             android:textColor="#19548E"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -213,13 +216,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Replicar el contenido del primer cuadro -->
+
         <ImageView
             android:layout_width="55dp"
             android:layout_height="20dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="Icono de transporte público"
             android:src="@drawable/user"
+            android:id="@+id/icon2"
             app:tint="#19548E" />
 
         <LinearLayout
@@ -232,6 +236,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TRANSPORTE PÚBLICO"
+                android:id="@+id/tvDescripcion2"
                 android:textColor="#19548E"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -247,6 +252,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18/11/2024 15:00"
+                android:id="@+id/tvFecha2"
                 android:textColor="#19548E"
                 android:textSize="12sp"
                 android:layout_marginTop="4dp" />
@@ -255,6 +261,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/tvMonto2"
             android:text="1.50 Bs"
             android:textColor="#19548E"
             android:textSize="16sp"
@@ -278,9 +285,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Replicar el contenido del segundo cuadro -->
+
         <ImageView
             android:layout_width="55dp"
+            android:id="@+id/icon3"
             android:layout_height="20dp"
             android:layout_marginEnd="8dp"
             android:contentDescription="Icono de transporte público"
@@ -297,6 +305,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TRANSPORTE PÚBLICO"
+                android:id="@+id/tvDescripcion3"
                 android:textColor="#19548E"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -312,6 +321,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="18/11/2024 15:30"
+                android:id="@+id/tvFecha3"
                 android:textColor="#19548E"
                 android:textSize="12sp"
                 android:layout_marginTop="4dp" />
@@ -322,6 +332,7 @@
             android:layout_height="wrap_content"
             android:text="3.00 Bs"
             android:textColor="#19548E"
+            android:id="@+id/tvMonto3"
             android:textSize="16sp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -378,57 +389,31 @@
                         android:textAlignment="center" />
 
                 </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.25"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageViewPagar"
-                        android:layout_width="30dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/coin_dollar"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="8dp"
-                        android:textColor="@color/white"
-                        app:tint="@android:color/white" />
-
-
-                    <TextView
-                        android:id="@+id/textViewPagar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Pagar"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
-
-                </LinearLayout>
-
-                <FrameLayout
-                    android:id="@+id/frameLayoutCenter"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                <ImageView
+                    android:id="@+id/imageCanjeo"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:src="@drawable/trophy"
                     android:layout_gravity="center"
-
-                    app:layout_constraintBottom_toTopOf="@+id/app_bar"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:elevation="8dp">
-
-                    <ImageView
-                        android:id="@+id/imageViewLogo"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:clipToOutline="true"
-                        android:scaleType="centerInside"
-                        android:src="@drawable/logo" />
-                </FrameLayout>
+                    android:layout_marginTop="8dp"
+                    app:tint="@android:color/white" />
 
 
+                <TextView
+                    android:id="@+id/textCajear"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Puntos"
+                    android:textColor="@color/white"
+                    android:textAlignment="center" />
 
-
+            </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

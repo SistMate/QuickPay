@@ -22,13 +22,14 @@ class HomePageP : AppCompatActivity() {
     private lateinit var mDatabase: DatabaseReference
     private lateinit var tvMonto: TextView
     private lateinit var tvPuntos: TextView
-
+    private lateinit var tvTransacciones: TextView
     private lateinit var tvHeader: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home_page_p)
+
 
         // Configuración para ajustar la visualización con el borde de la pantalla
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -39,12 +40,14 @@ class HomePageP : AppCompatActivity() {
 
         // Inicializa el TextView que mostrará el nombre del usuario
         tvHeader = findViewById(R.id.tvHeader)
-        tvMonto = findViewById(R.id.tvMonto) // Asocia el TextView de monto
+        tvMonto = findViewById(R.id.tvMontoTotal) // Asocia el TextView de monto
         tvPuntos = findViewById(R.id.tvPuntos)
+
 
         // Llamar a la función para obtener el nombre del usuario desde Firebase
         getUserName()
         getUserData()
+       // getUserTransacciones()
 
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
@@ -69,9 +72,10 @@ class HomePageP : AppCompatActivity() {
         tvGoTransacciones.setOnClickListener{
             goToTransacciones()
         }
-        val tvGoPagar = findViewById<ImageView>(R.id.imageViewPagar)
-        tvGoPagar.setOnClickListener{
-            goToPagar()
+
+        val tvGoPuntos = findViewById<ImageView>(R.id.imageCanjeo)
+        tvGoPuntos.setOnClickListener{
+            goToPuntos()
         }
     }
 
@@ -129,6 +133,7 @@ class HomePageP : AppCompatActivity() {
     }
 
 
+
     // Método para mostrar alertas en caso de error
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(this)
@@ -152,9 +157,44 @@ class HomePageP : AppCompatActivity() {
         val i = Intent(this, Transacciones_Pasajero::class.java)
         startActivity(i)
     }
-    private fun goToPagar(){
 
-        val i = Intent(this, Pagar_Pasajero::class.java)
+    private fun goToPuntos(){
+
+        val i = Intent(this, CanjeoPuntos::class.java)
         startActivity(i)
     }
+    /*private fun getUserTransacciones() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val myRef: DatabaseReference = database.getReference("Users")
+            val userId = user.uid
+
+            myRef.child(userId).child("transacciones").addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val transaccionesList = mutableListOf<String>()
+
+                    for (transaccionSnapshot in dataSnapshot.children) {
+                        val monto = transaccionSnapshot.child("monto").getValue(Int::class.java) ?: 0
+                        val fecha = transaccionSnapshot.child("fecha").getValue(String::class.java) ?: "Fecha no disponible"
+                        val descripcion = transaccionSnapshot.child("descripcion").getValue(String::class.java) ?: "Descripción no disponible"
+                        val transaccionInfo = "Monto: $monto Bs, Fecha: $fecha, Descripción: $descripcion"
+                        transaccionesList.add(transaccionInfo)
+                    }
+
+                    // Si estás usando RecyclerView
+                    val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewTransacciones)
+                    val adapter = TransaccionesAdapter(transaccionesList)
+                    recyclerView.adapter = adapter
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    showAlert("Error al obtener las transacciones: ${databaseError.message}")
+                }
+            })
+        } else {
+            showAlert("Usuario no autenticado")
+        }
+    }*/
+
 }

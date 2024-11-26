@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/FondoHome"
+    tools:context=".Perfil_pasajero">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Sección superior: Imagen y datos básicos -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                android:background="@drawable/top_background">
+
+                <!-- Fondo de burbujas -->
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="0.2"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/burbujas" />
+
+                <!-- Imagen del usuario -->
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/account_circle_24dp_000000" />
+
+                <!-- Nombre del usuario -->
+                <TextView
+                    android:id="@+id/textViewName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Name"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+                <!-- Correo del usuario -->
+                <TextView
+                    android:id="@+id/textViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="correo electronico"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+                <ImageView
+                    android:id="@+id/imageAtras"
+                    android:layout_width="62dp"
+                    android:layout_height="67dp"
+                    app:srcCompat="@drawable/icono_atras"
+                    tools:layout_editor_absoluteX="0dp"
+                    tools:layout_editor_absoluteY="0dp"
+                    tools:ignore="MissingConstraints" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:fillViewport="true"
+                android:background="@drawable/white_background"
+                android:elevation="3dp"
+                android:padding="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Título -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Datos del Usuario"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:paddingBottom="8dp" />
+
+                    <!-- Cédula de Identidad -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Cédula de Identidad"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:paddingTop="8dp" />
+                    <EditText
+                        android:id="@+id/textViewCedula"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese su cédula de identidad"
+                        android:inputType="number"
+                        android:padding="8dp"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <!-- Fecha de Nacimiento -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha de Nacimiento"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:paddingTop="8dp" />
+                    <EditText
+                        android:id="@+id/textViewFechaNacimiento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese su fecha de nacimiento"
+                        android:inputType="date"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <!-- Número de Celular -->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Número de Celular"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        android:paddingTop="8dp" />
+                    <EditText
+                        android:id="@+id/textViewNumeroCelular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Ingrese su número de celular"
+                        android:inputType="number"
+                        android:padding="8dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <!-- Botón para guardar cambios -->
+                    <Button
+                        android:id="@+id/btnSaveChanges"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:backgroundTint="#19548E"
+                        android:text="Guardar Cambios"
+                        android:textColor="@color/white" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="8dp" />
+
+                    <!-- Botón para cambiar contraseña -->
+                    <Button
+                        android:id="@+id/btn_change_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#19548E"
+                        android:text="Cambiar Contraseña"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+            </ScrollView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="BottomAppBar">
+
+        <com.google.android.material.bottomappbar.BottomAppBar
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:backgroundTint="#19548E"
+            app:fabCradleMargin="8dp"
+            app:fabCradleRoundedCornerRadius="50dp"
+            app:fabCradleVerticalOffset="6dp">
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageHome"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/home_outline"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        app:tint="@android:color/white" />
+
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Home"
+                        android:textColor="@color/white"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageCanjeo"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/trophy"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        app:tint="@android:color/white" />
+
+
+                    <TextView
+                        android:id="@+id/textCajear"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Puntos"
+                        android:textColor="@color/white"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageViewTransaction"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/credit_card"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        app:tint="@android:color/white" />
+
+
+                    <TextView
+                        android:id="@+id/textViewTansaction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Transacción"
+                        android:textColor="@color/white"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageViewSettings"
+                        android:layout_width="30dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/cog"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="8dp"
+                        app:tint="@android:color/white" />
+
+
+                    <TextView
+                        android:id="@+id/textViewSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ajustes"
+                        android:textColor="@color/white"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.bottomappbar.BottomAppBar>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

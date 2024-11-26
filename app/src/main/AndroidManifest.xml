@@ -16,6 +16,12 @@
         android:theme="@style/Theme.MyLoggin"
         tools:targetApi="31">
         <activity
+            android:name=".CanjeoPuntos"
+            android:exported="false" />
+        <activity
+            android:name=".Perfil_pasajero"
+            android:exported="false" />
+        <activity
             android:name=".Pagar_Pasajero"
             android:exported="false" />
         <activity

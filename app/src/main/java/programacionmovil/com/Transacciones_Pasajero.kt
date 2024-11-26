@@ -68,9 +68,9 @@ class Transacciones_Pasajero : AppCompatActivity() {
         tvGoHome.setOnClickListener{
             goToHome()
         }
-        val tvGoPagar = findViewById<ImageView>(R.id.imageViewPagar)
-        tvGoPagar.setOnClickListener{
-            goToPagar()
+        val tvGoCanjear = findViewById<ImageView>(R.id.imageCanjeo)
+        tvGoCanjear.setOnClickListener{
+            goToCanjear()
         }
 
 
@@ -122,9 +122,9 @@ class Transacciones_Pasajero : AppCompatActivity() {
         val i = Intent(this, HomePageP::class.java)
         startActivity(i)
     }
-    private fun goToPagar(){
+    private fun goToCanjear(){
 
-        val i = Intent(this, Pagar_Pasajero::class.java)
+        val i = Intent(this, CanjeoPuntos::class.java)
         startActivity(i)
     }
 

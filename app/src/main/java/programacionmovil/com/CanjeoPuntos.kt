@@ -2,7 +2,6 @@ package programacionmovil.com
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -17,7 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 
-class Pagar_Pasajero : AppCompatActivity() {
+class CanjeoPuntos : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
 
@@ -26,7 +25,7 @@ class Pagar_Pasajero : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_pagar_pasajero)
+        setContentView(R.layout.activity_canjeo_puntos)
 
         // Configuración para ajustar la visualización con el borde de la pantalla
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -51,15 +50,8 @@ class Pagar_Pasajero : AppCompatActivity() {
             startActivity(intent)
         }
 
-// Botón de Cerrar Sesión
-        val btnLogout = findViewById<Button>(R.id.btnLogout)
-        btnLogout.setOnClickListener {
-            mAuth.signOut()
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
 
-        }
+
         val tvGoAjustes = findViewById<ImageView>(R.id.imageViewSettings)
         tvGoAjustes.setOnClickListener{
             goToAjustes()
@@ -68,10 +60,16 @@ class Pagar_Pasajero : AppCompatActivity() {
         tvGoHome.setOnClickListener{
             goToHome()
         }
+
         val tvGoTransacciones = findViewById<ImageView>(R.id.imageViewTransaction)
         tvGoTransacciones.setOnClickListener{
-            goToTransaccion()
+            goToTransacciones()
         }
+        val tvGoPuntos = findViewById<ImageView>(R.id.imageCanjeo)
+        tvGoPuntos.setOnClickListener{
+            goToPuntos()
+        }
+
 
     }
 
@@ -110,6 +108,7 @@ class Pagar_Pasajero : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
+
     private fun goToAjustes(){
 
         val i = Intent(this, ajustes_pasajero::class.java)
@@ -120,14 +119,16 @@ class Pagar_Pasajero : AppCompatActivity() {
         val i = Intent(this, HomePageP::class.java)
         startActivity(i)
     }
-    private fun goToTransaccion(){
+
+    private fun goToTransacciones(){
 
         val i = Intent(this, Transacciones_Pasajero::class.java)
         startActivity(i)
     }
+    private fun goToPuntos(){
 
-
+        val i = Intent(this, CanjeoPuntos::class.java)
+        startActivity(i)
+    }
 
 }
-
-

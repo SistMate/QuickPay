@@ -1,8 +1,10 @@
 package programacionmovil.com
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
@@ -23,27 +25,28 @@ class ajustes_pasajero : AppCompatActivity() {
 
     private lateinit var tvHeader: TextView
 
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_ajustes_pasajero)
 
-        // Configuración para ajustar la visualización con el borde de la pantalla
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicializa el TextView que mostrará el nombre del usuario
+
         tvHeader = findViewById(R.id.tvHeader)
 
-        // Llamar a la función para obtener el nombre del usuario desde Firebase
+
         getUserName()
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
-// Verifica si hay una sesión activa
+
         if (mAuth.currentUser == null) {
             // Si no hay sesión activa, redirigir a MainActivity
             val intent = Intent(this, MainActivity::class.java)
@@ -51,7 +54,7 @@ class ajustes_pasajero : AppCompatActivity() {
             startActivity(intent)
         }
 
-// Botón de Cerrar Sesión
+
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         btnLogout.setOnClickListener {
             mAuth.signOut()
@@ -61,9 +64,9 @@ class ajustes_pasajero : AppCompatActivity() {
 
 
         }
-        val tvGoPagar = findViewById<ImageView>(R.id.imageViewPagar)
-        tvGoPagar.setOnClickListener{
-            goToPagar()
+        val tvGoCanjeo = findViewById<ImageView>(R.id.imageCanjeo)
+        tvGoCanjeo.setOnClickListener{
+            goToCanjeo()
         }
         val tvGoHome = findViewById<ImageView>(R.id.imageHome)
         tvGoHome.setOnClickListener{
@@ -73,6 +76,11 @@ class ajustes_pasajero : AppCompatActivity() {
         tvGoTransacciones.setOnClickListener{
             goToTransaccion()
         }
+        val tvGoAdministracion = findViewById<TextView>(R.id.tvAdminCuenta) 
+        tvGoAdministracion.setOnClickListener {
+            goToAdministracion()
+        }
+
     }
 
     private fun getUserName() {
@@ -110,9 +118,9 @@ class ajustes_pasajero : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-    private fun goToPagar(){
+    private fun goToCanjeo(){
 
-        val i = Intent(this, Pagar_Pasajero::class.java)
+        val i = Intent(this, CanjeoPuntos::class.java)
         startActivity(i)
     }
     private fun goToHome(){
@@ -123,6 +131,11 @@ class ajustes_pasajero : AppCompatActivity() {
     private fun goToTransaccion(){
 
         val i = Intent(this, Transacciones_Pasajero::class.java)
+        startActivity(i)
+    }
+    private fun goToAdministracion(){
+
+        val i = Intent(this, Perfil_pasajero::class.java)
         startActivity(i)
     }
 }
