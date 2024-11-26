@@ -176,7 +176,9 @@ class Registro_pasajero : AppCompatActivity() {
                         "ci" to ci,
                         "fechaNacimiento" to fechaNacimiento,
                         "celular" to celular,
-                        "role" to "Pasajero"
+                        "role" to "Pasajero",
+                        "monto" to 0,
+                        "puntosAcumulados" to 0
                     )
                     mDatabase.child("Users").child(userId).setValue(userMap)
                         .addOnCompleteListener { dbTask ->

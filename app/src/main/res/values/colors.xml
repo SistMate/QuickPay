@@ -5,5 +5,9 @@
     <color name="colorAzul">#153456</color>
     <color name="colorAzulsuave">#5ACCFF</color>
     <color name="colorAzulmedio">#19548E</color>
+    <color name="FondoHome">#BDEBFF</color>
+    <color name="colorAccentLight">#80FFFFFF</color>
+    <color name="Letras">#19548E</color>
+
 
 </resources>
