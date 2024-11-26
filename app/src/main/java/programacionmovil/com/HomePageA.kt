@@ -14,9 +14,9 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-//import com.google.firebase.firestore.FirebaseFirestore
-//import java.text.SimpleDateFormat
-//import java.util.*
+import com.google.firebase.firestore.FirebaseFirestore
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HomePageA : AppCompatActivity() {
 
@@ -31,7 +31,7 @@ class HomePageA : AppCompatActivity() {
     private lateinit var getButton: Button
     private lateinit var creditTotal: TextView
 
-    //private val db = FirebaseFirestore.getInstance()
+    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -103,88 +103,88 @@ class HomePageA : AppCompatActivity() {
                // }
 
               //  creditTotal.text = montos.toString()  // Establece el texto en el TextView
-            }
-
-
         }
 
-        // Verificar si el usuario está logueado
-       // if (mAuth.currentUser == null) {
-           // val intent = Intent(this, MainActivity::class.java).apply {
-              //  flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-          //  }
-          //  startActivity(intent)
-          //  return
-     //   }
 
-        // Callback para manejar el botón "Atrás"
-        //onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            //override fun handleOnBackPressed() {
-               // moveTaskToBack(true) // Evita que el usuario cierre la app con el botón atrás
-          //  }
-       // })
 
-        // Configurar los listeners de los botones de fechas
-       // btnStartDate.setOnClickListener {
-           // showDatePickerDialog { date ->
-            //    textStartDate.text = date
-          //  }
-      //  }
 
-       // btnEndDate.setOnClickListener {
-            //showDatePickerDialog { date ->
-              //  textEndDate.text = date
-           // }
-      //  }
+//         Verificar si el usuario está logueado
+        if (mAuth.currentUser == null) {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            startActivity(intent)
+            return
+        }
 
-        // Inicializar los ImageViews
-       // imageViewHome = findViewById(R.id.imageView2)
-       // imageViewPagar = findViewById(R.id.imageViewPagar)
-       // imageViewTransaction = findViewById(R.id.imageViewTransaction)
-       // imageViewSettings = findViewById(R.id.imageViewSettings)
+//         Callback para manejar el botón "Atrás"
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                moveTaskToBack(true) // Evita que el usuario cierre la app con el botón atrás
+            }
+        })
 
-        // Configurar listeners de los ImageViews
-       // imageViewHome.setOnClickListener {
-          //  startActivity(Intent(this, HomePageA::class.java))
-       // }
+//         Configurar los listeners de los botones de fechas
+        btnStartDate.setOnClickListener {
+            showDatePickerDialog { date ->
+                textStartDate.text = date
+            }
+        }
 
-        //imageViewPagar.setOnClickListener {
-          //  startActivity(Intent(this, CobrarActivity::class.java))
-       // }
+        btnEndDate.setOnClickListener {
+            showDatePickerDialog { date ->
+                textEndDate.text = date
+            }
+        }
 
-        //imageViewTransaction.setOnClickListener {
-           // startActivity(Intent(this, TransactionActivity::class.java))
-      //  }
+//         Inicializar los ImageViews
+        imageViewHome = findViewById(R.id.imageView2)
+        imageViewPagar = findViewById(R.id.imageViewPagar)
+        imageViewTransaction = findViewById(R.id.imageViewTransaction)
+        imageViewSettings = findViewById(R.id.imageViewSettings)
 
-        //imageViewSettings.setOnClickListener {
-          //  startActivity(Intent(this, CobrarActivity::class.java))
-       // }
+//         Configurar listeners de los ImageViews
+        imageViewHome.setOnClickListener {
+            startActivity(Intent(this, HomePageA::class.java))
+        }
 
-        // Ajustar los Insets de la ventana si es necesario
-        //findViewById<LinearLayoutCompat>(R.id.main)?.let { mainLayout ->
-          //  ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
-           //     val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-          //      v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-          //      insets
-          //  }
-      //  }
-    //}
+        imageViewPagar.setOnClickListener {
+            startActivity(Intent(this, CobrarActivity::class.java))
+        }
 
-    // Método para mostrar el selector de fechas
-   // private fun showDatePickerDialog(onDateSet: (String) -> Unit) {
-       // val calendar = Calendar.getInstance()
-       // val year = calendar.get(Calendar.YEAR)
-       // val month = calendar.get(Calendar.MONTH)
-        //val day = calendar.get(Calendar.DAY_OF_MONTH)
+        imageViewTransaction.setOnClickListener {
+            startActivity(Intent(this, TransactionActivity::class.java))
+        }
 
-      //  val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
-          //  val selectedDate = Calendar.getInstance().apply {
-          //      set(selectedYear, selectedMonth, selectedDay)
-          //  }
-          //  val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(selectedDate.time)
-          //  onDateSet(formattedDate)
-       // }, year, month, day)
+        imageViewSettings.setOnClickListener {
+            startActivity(Intent(this, CobrarActivity::class.java))
+        }
 
-      //  datePickerDialog.show()
-   // }
+//         Ajustar los Insets de la ventana si es necesario
+        findViewById<LinearLayoutCompat>(R.id.main)?.let { mainLayout ->
+            ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+                insets
+            }
+        }
+    }
+
+//     Método para mostrar el selector de fechas
+    private fun showDatePickerDialog(onDateSet: (String) -> Unit) {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        val datePickerDialog = DatePickerDialog(this, { _, selectedYear, selectedMonth, selectedDay ->
+            val selectedDate = Calendar.getInstance().apply {
+                set(selectedYear, selectedMonth, selectedDay)
+            }
+            val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(selectedDate.time)
+            onDateSet(formattedDate)
+        }, year, month, day)
+
+        datePickerDialog.show()
+   }
 }
