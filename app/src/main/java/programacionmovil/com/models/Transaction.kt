@@ -5,3 +5,10 @@ data class Transaction(
     val date: String,
     val description: String
 )
+
+    data class TransactionC(
+        val title: String,
+        val paymentMethod: String,
+        val trufi: String,
+        val amount: String
+    )

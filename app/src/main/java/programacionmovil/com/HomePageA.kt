@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
+import programacionmovil.com.conductor.SettingsCActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -43,14 +44,11 @@ class HomePageA : AppCompatActivity() {
             insets
         }
 
-        // Inicializar el botón getButton
         getButton = findViewById(R.id.getButton)
 
-        // Inicializar Firebase
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
-        // Inicializar vistas
 
         creditTotal = findViewById(R.id.creditTotal)
         textStartDate = findViewById(R.id.textStartDate)
@@ -59,12 +57,24 @@ class HomePageA : AppCompatActivity() {
         val btnStartDate: LinearLayoutCompat = findViewById(R.id.btnStartDate)
         val btnEndDate: LinearLayoutCompat = findViewById(R.id.btnEndDate)
 
-        // Listener para getButton
+        val usuarioIdEspecifico = "Mateo Villagomez"
+
         getButton.setOnClickListener {
-//            db.collection("HistorialConductor").document().get().addOnSuccessListener {
-//                transactionConductor.setText(it.get("NombreUsuario") as String?)
-//
-//            }
+            db.collection("HistorialConductor")
+                .whereEqualTo("NombreUsuario", usuarioIdEspecifico)
+                .get().addOnSuccessListener { documents ->
+                val nombresUsuarios = StringBuilder()
+
+                for (document in documents) {
+                    val nombreUsuario = document.getString("Monto")
+                    if (nombreUsuario != null) {
+                        nombresUsuarios.append(nombreUsuario).append("\n")
+                    }
+                }
+
+                creditTotal.text = nombresUsuarios.toString()
+
+            }
 
 //            db.collection("HistorialConductor").get().addOnSuccessListener { documents ->
 //                val nombresUsuarios = StringBuilder()  // Usamos StringBuilder para concatenar eficientemente
@@ -76,7 +86,7 @@ class HomePageA : AppCompatActivity() {
 //                    }
 //                }
 //
-//                transactionConductor.text = nombresUsuarios.toString()  // Establece el texto en el TextView
+//                creditTotal.text = nombresUsuarios.toString()  // Establece el texto en el TextView
 //            }
 
             //Ejemplo para subir datos
@@ -157,7 +167,7 @@ class HomePageA : AppCompatActivity() {
         }
 
         imageViewSettings.setOnClickListener {
-            startActivity(Intent(this, CobrarActivity::class.java))
+            startActivity(Intent(this, HomePageC::class.java))
         }
 
 //         Ajustar los Insets de la ventana si es necesario
