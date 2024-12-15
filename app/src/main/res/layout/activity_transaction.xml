@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="#D3F2FF">
 
-
     <!-- Header with Name -->
     <TextView
         android:id="@+id/userName"
@@ -38,7 +37,8 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintTop_toBottomOf="@+id/userName"
-        tools:layout_editor_absoluteX="20dp">
+        app:layout_constraintVertical_bias="0.261"
+        tools:layout_editor_absoluteX="24dp">
 
 
         <!-- Date Inputs -->
@@ -124,12 +124,24 @@
     <!-- RecyclerView for Transactions -->
 
     <!-- Bottom Navigation -->
+
+
+    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+    <!--        android:id="@+id/bottomNavigationView"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="#19548E"-->
+    <!--        app:itemTextColor="@color/white"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:menu="@menu/bottom_navigation_menu" />-->
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/bottomNavigationView"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="BottomAppBar">
 
@@ -142,7 +154,6 @@
             app:fabCradleMargin="8dp"
             app:fabCradleRoundedCornerRadius="50dp"
             app:fabCradleVerticalOffset="6dp">
-
 
 
             <LinearLayout
@@ -169,8 +180,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Home"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -194,8 +205,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pagar"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -242,8 +253,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Transacción"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -266,8 +277,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ajustes"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -282,27 +293,48 @@
         <!--            android:src="@color/white"/>-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
-    <!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
-    <!--        android:id="@+id/bottomNavigationView"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="#19548E"-->
-    <!--        app:itemTextColor="@color/white"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:menu="@menu/bottom_navigation_menu" />-->
-
-<androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/reciclertransaction"
         android:layout_width="400dp"
-        android:layout_height="390dp"
-        android:layout_marginBottom="50dp"
+        android:layout_height="440dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:spanCount="1"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="5dp"
         tools:listitem="@layout/item_transaction_conductor" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Extracto Historico"
+        android:textColor="#19548E"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userName" />
+
+    <Button
+        android:id="@+id/getButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="traer datos"
+        tools:ignore="MissingConstraints" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historial de movimientos"
+        android:textColor="#19548E"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/reciclertransaction"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

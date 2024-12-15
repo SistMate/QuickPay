@@ -224,14 +224,15 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </ScrollView>
+
     <Button
         android:id="@+id/getButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="98dp"
+        android:layout_height="45dp"
         android:text="Button"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="339dp"
-        tools:ignore="MissingConstraints" />
+        tools:layout_editor_absoluteY="339dp" />
 
 <!--    <TextView-->
 <!--        android:id="@+id/transactionConductor"-->

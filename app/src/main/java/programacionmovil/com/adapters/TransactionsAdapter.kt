@@ -30,7 +30,7 @@ class TransactionsAdapter(private val transactions: MutableList<Transaction>) :
 
     class TransactionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val amountText: TextView = itemView.findViewById(R.id.amountText)
-        val dateText: TextView = itemView.findViewById(R.id.dateText)
-        val descriptionText: TextView = itemView.findViewById(R.id.descriptionText)
+        val dateText: TextView = itemView.findViewById(R.id.title)
+        val descriptionText: TextView = itemView.findViewById(R.id.paymentMethodText)
     }
 }

@@ -9,14 +9,14 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="70dp"
         android:background="#DFF6DC"
-
         android:orientation="horizontal"
         android:padding="12dp"
         app:cardCornerRadius="10dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <TextView
             android:id="@+id/titleText"
