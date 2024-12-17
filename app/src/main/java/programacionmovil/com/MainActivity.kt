@@ -122,10 +122,10 @@ class MainActivity : AppCompatActivity() {
     private fun togglePasswordVisibility() {
         if (isPasswordVisible) {
             passwordText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            showPasswordIcon.setBackgroundResource(R.drawable.eye)
+            showPasswordIcon.setBackgroundResource(R.drawable.eye_blocked)
         } else {
             passwordText.inputType = InputType.TYPE_CLASS_TEXT
-            showPasswordIcon.setBackgroundResource(R.drawable.eye_blocked)
+            showPasswordIcon.setBackgroundResource(R.drawable.eye)
         }
         passwordText.setSelection(passwordText.text.length)
         isPasswordVisible = !isPasswordVisible

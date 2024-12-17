@@ -96,18 +96,19 @@
 
             <ImageView
                 android:id="@+id/showPasswordIcon"
-                android:layout_width="29dp"
-                android:layout_height="35dp"
+                android:layout_width="24dp"
+                android:layout_height="26dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/eye"
                 android:contentDescription="Mostrar/Ocultar contraseña"
-                android:layout_marginRight="10dp"
                 android:padding="15dp"
                 android:visibility="visible" />
         </LinearLayout>
 
 
         <TextView
+            android:id="@+id/olvidaste_contraseña"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="¿Olvidaste tu contraseña?"

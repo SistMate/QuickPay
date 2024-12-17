@@ -46,21 +46,21 @@ class Perfil_pasajero : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_perfil_pasajero)
 
-        // Configurar diseño con insets
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicializar Firebase Auth y Database
+
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
-        // Referencias a los elementos del layout
+
         initializeUI()
 
-        // Recuperar y mostrar la información del usuario
+
         fetchUserData { name, email, ci, fechaNacimiento, celular ->
             ciInicial = ci ?: ""
             initialFechaNacimiento = fechaNacimiento ?: ""
@@ -77,13 +77,13 @@ class Perfil_pasajero : AppCompatActivity() {
         val currentMonth = calendar.get(Calendar.MONTH)
         val currentDay = calendar.get(Calendar.DAY_OF_MONTH)
 
-// Restricción para que la fecha máxima sea hace 18 años
+
         val eighteenYearsAgo = Calendar.getInstance()
         eighteenYearsAgo.set(currentYear - 18, currentMonth, currentDay)
 
         val datePickerListener = DatePickerDialog.OnDateSetListener { _, year, month, day ->
             val selectedDate = "%02d/%02d/%04d".format(day, month + 1, year)
-            fechaNacimientoEditText.setText(selectedDate) // Actualiza el texto del EditText
+            fechaNacimientoEditText.setText(selectedDate)
         }
 
         fechaNacimientoEditText.setOnClickListener {
@@ -94,7 +94,7 @@ class Perfil_pasajero : AppCompatActivity() {
                 currentMonth,
                 currentDay
             )
-            datePickerDialog.datePicker.maxDate = eighteenYearsAgo.timeInMillis // Establece la fecha máxima
+            datePickerDialog.datePicker.maxDate = eighteenYearsAgo.timeInMillis
             datePickerDialog.show()
         }
         // Configurar el botón de cambiar contraseña
