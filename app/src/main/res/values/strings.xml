@@ -6,7 +6,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="nameuser">Mateo Villagomez: 1023kfv</string>
+    <string name="nameuser">%1$s: %2$s</string>
     <string name="money_balance">0</string>
 
     <string name="transaction_name">Transporte Público</string>

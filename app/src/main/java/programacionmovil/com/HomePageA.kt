@@ -86,11 +86,13 @@ class HomePageA : AppCompatActivity() {
                 if (dataSnapshot.exists()) {
                     // Obtén el valor del "name"
                     val userName = dataSnapshot.child("name").value.toString()
+                    val userIdInfo = dataSnapshot.child("userIdInfo").value.toString()
+
+                    val formattedName = getString(R.string.nameuser, userName, userIdInfo)
 
                     // Actualiza el TextView para mostrar el nombre del usuario
                     val usuarioIdEspecifico: TextView = findViewById(R.id.usuarioIdEspecifico)
                     usuarioIdEspecifico.text = userName
-
                     val monto = dataSnapshot.child("monto").value.toString()
                     creditTotal.text = monto
                 } else {
@@ -161,7 +163,7 @@ class HomePageA : AppCompatActivity() {
         }
 
         imageViewSettings.setOnClickListener {
-            startActivity(Intent(this, HomePageC::class.java))
+            startActivity(Intent(this, ajustes_pasajero::class.java))
         }
 
 //         Ajustar los Insets de la ventana si es necesario
