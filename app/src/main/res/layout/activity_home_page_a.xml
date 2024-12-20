@@ -7,7 +7,7 @@
     android:background="#D3F2FF">
 
     <TextView
-        android:id="@+id/tvUser"
+        android:id="@+id/usuarioIdEspecifico"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#19548E"
@@ -33,7 +33,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUser"
+        app:layout_constraintTop_toBottomOf="@+id/usuarioIdEspecifico"
         tools:ignore="HardcodedText,MissingConstraints" />
 
 
@@ -52,7 +52,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUser"
+        app:layout_constraintTop_toBottomOf="@+id/usuarioIdEspecifico"
         app:layout_constraintVertical_bias="0.52"
         tools:ignore="MissingClass" />
 
@@ -70,7 +70,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUser"
+        app:layout_constraintTop_toBottomOf="@+id/usuarioIdEspecifico"
         app:layout_constraintVertical_bias="0.386">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -190,49 +190,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:gravity="center|top"
-            android:orientation="vertical">
 
-            <include
-                android:id="@+id/transaction_item_1"
-                layout="@layout/item_transaction" />
-
-            <include
-                android:id="@+id/transaction_item_2"
-                layout="@layout/item_transaction" />
-
-            <include
-                android:id="@+id/transaction_item_3"
-                layout="@layout/item_transaction" />
-
-            <include
-                android:id="@+id/transaction_item_4"
-                layout="@layout/item_transaction" />
-
-            <include
-                android:id="@+id/transaction_item_5"
-                layout="@layout/item_transaction" />
-
-            <include
-                android:id="@+id/transaction_item_6"
-                layout="@layout/item_transaction" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reciclertransaction"
+            android:layout_width="400dp"
+            android:layout_height="370dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@+id/bottomNavigationView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintVertical_bias="0.3"
+            app:spanCount="1"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="5dp"
+            tools:listitem="@layout/item_transaction_conductor" />
     </ScrollView>
 
-    <Button
-        android:id="@+id/getButton"
-        android:layout_width="98dp"
-        android:layout_height="45dp"
-        android:text="Button"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="339dp" />
+
 
 <!--    <TextView-->
 <!--        android:id="@+id/transactionConductor"-->

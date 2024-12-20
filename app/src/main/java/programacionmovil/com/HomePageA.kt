@@ -3,23 +3,32 @@ package programacionmovil.com
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.ImageView
+import android.widget.Button
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.firestore.FirebaseFirestore
+import programacionmovil.com.adapters.TransactionConductorAdapter
+import programacionmovil.com.conductor.SettingsCActivity
 import androidx.core.view.ViewCompat
+import programacionmovil.com.utils.RealtimeManager
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.firestore.FirebaseFirestore
-import programacionmovil.com.conductor.SettingsCActivity
+import programacionmovil.com.models.TransactionC
+//import programacionmovil.com.conductor.SettingsCActivity
 import java.text.SimpleDateFormat
 import java.util.*
 
 class HomePageA : AppCompatActivity() {
+    private val db = FirebaseFirestore.getInstance()
+    private val realtimeManager = RealtimeManager()
 
     private lateinit var mAuth: FirebaseAuth
     private lateinit var mDatabase: DatabaseReference
@@ -28,15 +37,21 @@ class HomePageA : AppCompatActivity() {
     private lateinit var imageViewTransaction: ImageView
     private lateinit var imageViewSettings: ImageView
     private lateinit var textStartDate: TextView
+    private lateinit var recyclerView: RecyclerView
     private lateinit var textEndDate: TextView
     private lateinit var getButton: Button
     private lateinit var creditTotal: TextView
+    private lateinit var transactionAdapter: TransactionConductorAdapter
 
-    private val db = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home_page_a)
+
+        setupUI()
+        setupRecyclerView()
+        setupDatePickers()
+
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.homeconductor)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -44,11 +59,14 @@ class HomePageA : AppCompatActivity() {
             insets
         }
 
-        getButton = findViewById(R.id.getButton)
+
+
+
 
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
+        val currentUser = mAuth.currentUser
 
         creditTotal = findViewById(R.id.creditTotal)
         textStartDate = findViewById(R.id.textStartDate)
@@ -57,65 +75,41 @@ class HomePageA : AppCompatActivity() {
         val btnStartDate: LinearLayoutCompat = findViewById(R.id.btnStartDate)
         val btnEndDate: LinearLayoutCompat = findViewById(R.id.btnEndDate)
 
-        val usuarioIdEspecifico = "Mateo Villagomez"
 
-        getButton.setOnClickListener {
-            db.collection("HistorialConductor")
-                .whereEqualTo("NombreUsuario", usuarioIdEspecifico)
-                .get().addOnSuccessListener { documents ->
-                val nombresUsuarios = StringBuilder()
 
-                for (document in documents) {
-                    val nombreUsuario = document.getString("Monto")
-                    if (nombreUsuario != null) {
-                        nombresUsuarios.append(nombreUsuario).append("\n")
-                    }
+
+        if (currentUser != null) {
+            val userId = currentUser.uid // ID del usuario logueado
+
+            // Accede al nodo correspondiente en Firebase Realtime Database
+            mDatabase.child("Users").child(userId).get().addOnSuccessListener { dataSnapshot ->
+                if (dataSnapshot.exists()) {
+                    // Obtén el valor del "name"
+                    val userName = dataSnapshot.child("name").value.toString()
+
+                    // Actualiza el TextView para mostrar el nombre del usuario
+                    val usuarioIdEspecifico: TextView = findViewById(R.id.usuarioIdEspecifico)
+                    usuarioIdEspecifico.text = userName
+
+                    val monto = dataSnapshot.child("monto").value.toString()
+                    creditTotal.text = monto
+                } else {
+                    // Maneja el caso en el que no se encuentran los datos del usuario
+                    val usuarioIdEspecifico: TextView = findViewById(R.id.usuarioIdEspecifico)
+                    usuarioIdEspecifico.text = "Usuario no encontrado"
+                    creditTotal.text = "0"
                 }
-
-                creditTotal.text = nombresUsuarios.toString()
-
+            }.addOnFailureListener {
+                // Manejo de errores
+                val usuarioIdEspecifico: TextView = findViewById(R.id.usuarioIdEspecifico)
+                usuarioIdEspecifico.text = "Error al obtener datos"
+                creditTotal.text = "Error"
             }
-
-//            db.collection("HistorialConductor").get().addOnSuccessListener { documents ->
-//                val nombresUsuarios = StringBuilder()  // Usamos StringBuilder para concatenar eficientemente
-//
-//                for (document in documents) {
-//                    val nombreUsuario = document.getString("Monto")
-//                    if (nombreUsuario != null) {
-//                        nombresUsuarios.append(nombreUsuario).append("\n")  // Agrega cada nombre con un salto de línea
-//                    }
-//                }
-//
-//                creditTotal.text = nombresUsuarios.toString()  // Establece el texto en el TextView
-//            }
-
-            //Ejemplo para subir datos
-
-//            db.collection("HistorialConductor").document(idtansaccion).set(
-//                hashMapOf(
-//                    "provider" to provider,
-//                    "adress" to addess.text.toString(),
-//                    "phone" to phonetext.text.toString()
-//                )
-//            )
-
-
-            //Para eliminar
-//            db.collection("HistorialConductor").document().delete()
-        //  db.collection("HistorialConductor").get().addOnSuccessListener { documents ->
-               // val montos = StringBuilder()  // Usamos StringBuilder para concatenar eficientemente
-
-              //  for (document in documents) {
-                //    val monto = document.getDouble("Monto") // Cambia el nombre del campo según corresponda
-                 //   if (monto != null) {
-                //       montos.append("$monto\n")  // Agrega cada monto con un salto de línea y etiqueta
-                //    }
-               // }
-
-              //  creditTotal.text = montos.toString()  // Establece el texto en el TextView
+        } else {
+            // Manejo para usuarios no logueados
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
-
-
 
 
 //         Verificar si el usuario está logueado
@@ -179,6 +173,52 @@ class HomePageA : AppCompatActivity() {
             }
         }
     }
+
+    val transactionList = listOf(
+        TransactionC("CB - 15 de octubre", "Pago en QR", "Taxi: TXQR123", "Bs. 7.50"),
+        TransactionC("CB - 03 de noviembre", "Pago en NFC", "Taxi: CAF567", "Bs. 10.00"),
+        TransactionC("CB - 08 de diciembre", "Pago en QR", "Taxi: SPRM890", "Bs. 45.30"),
+        TransactionC("CB - 20 de enero", "Pago en NFC", "Taxi: FRMC123", "Bs. 12.75"),
+        TransactionC("CB - 15 de octubre", "Pago en QR", "Taxi: TXQR123", "Bs. 7.50"),
+        TransactionC("CB - 03 de noviembre", "Pago en NFC", "Taxi: CAF567", "Bs. 10.00"),
+        TransactionC("CB - 08 de diciembre", "Pago en QR", "Taxi: SPRM890", "Bs. 45.30"),
+        TransactionC("CB - 20 de enero", "Pago en NFC", "Taxi: FRMC123", "Bs. 12.75"),
+        TransactionC("CB - 15 de octubre", "Pago en QR", "Taxi: TXQR123", "Bs. 7.50"),
+        TransactionC("CB - 03 de noviembre", "Pago en NFC", "Taxi: CAF567", "Bs. 10.00"),
+        TransactionC("CB - 08 de diciembre", "Pago en QR", "Taxi: SPRM890", "Bs. 45.30"),
+        TransactionC("CB - 20 de enero", "Pago en NFC", "Taxi: FRMC123", "Bs. 12.75")
+
+    )
+
+
+    private fun setupUI() {
+        recyclerView = findViewById(R.id.reciclertransaction)
+        textStartDate = findViewById(R.id.textStartDate)
+        textEndDate = findViewById(R.id.textEndDate)
+    }
+
+    private fun setupRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        transactionAdapter = TransactionConductorAdapter(emptyList())
+//        recyclerView.adapter = transactionAdapter
+        recyclerView.adapter = TransactionConductorAdapter(transactionList)
+
+    }
+
+    private fun setupDatePickers() {
+        val btnStartDate: LinearLayoutCompat = findViewById(R.id.btnStartDate)
+        val btnEndDate: LinearLayoutCompat = findViewById(R.id.btnEndDate)
+
+        btnStartDate.setOnClickListener {
+            showDatePickerDialog { date -> textStartDate.text = date }
+        }
+
+        btnEndDate.setOnClickListener {
+            showDatePickerDialog { date -> textEndDate.text = date }
+        }
+    }
+
+
 
 //     Método para mostrar el selector de fechas
     private fun showDatePickerDialog(onDateSet: (String) -> Unit) {

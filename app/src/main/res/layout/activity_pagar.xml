@@ -51,7 +51,6 @@
             app:fabCradleVerticalOffset="6dp">
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -74,10 +73,10 @@
                     <TextView
                         android:id="@+id/textView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="Home"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -101,8 +100,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pagar"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -148,8 +147,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Transacción"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -172,20 +171,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Ajustes"
-                        android:textColor="@color/white"
-                        android:textAlignment="center" />
+                        android:textAlignment="center"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
             </LinearLayout>
         </com.google.android.material.bottomappbar.BottomAppBar>
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:layout_anchor="@id/app_bar"
-            app:maxImageSize="36dp"
-            app:backgroundTint="@color/white"
-            app:tint="@color/white"
-            android:src="@color/white"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,14 +1,15 @@
 package programacionmovil.com.models
 
 data class Transaction(
-    val amount: Double,
+    val key: String? = null,
+    val description: String,
     val date: String,
-    val description: String
+    val amount: Double,
 )
 
     data class TransactionC(
         val title: String,
-        val paymentMethod: String,
-        val trufi: String,
-        val amount: String
+        val description: String,
+        val details: String,
+        val monto: String
     )

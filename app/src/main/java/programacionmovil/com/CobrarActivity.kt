@@ -14,6 +14,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.google.zxing.BarcodeFormat
 import programacionmovil.com.conductor.SettingsCActivity
 
+
+
 class CobrarActivity : AppCompatActivity() {
 
 
@@ -25,7 +27,6 @@ class CobrarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_cobrar)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -36,7 +37,7 @@ class CobrarActivity : AppCompatActivity() {
         var ivCodigoQR: ImageView = findViewById(R.id.ivCodigoQR)
         var etDatos: EditText = findViewById(R.id.etDatos)
         var btnGenerar: Button = findViewById(R.id.btnGenerar)
-
+        var btnDownload: Button = findViewById(R.id.btnDownload)
 
         imageViewHome = findViewById(R.id.imageView2)
         imageViewPagar = findViewById(R.id.imageViewPagar)
@@ -79,6 +80,24 @@ class CobrarActivity : AppCompatActivity() {
         })
 
 
-        
+        //Funcion de descargar el qr
+        btnDownload.setOnClickListener {
+            try {
+                val drawable = ivCodigoQR.drawable
+                if (drawable != null && drawable is android.graphics.drawable.BitmapDrawable) {
+                    val bitmap = drawable.bitmap
+                    val message = saveQRCodeToStorage(bitmap)
+                    android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_LONG).show()
+                } else {
+                    android.widget.Toast.makeText(this, "No hay un código QR para descargar", android.widget.Toast.LENGTH_SHORT).show()
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                android.widget.Toast.makeText(this, "Error al descargar el QR", android.widget.Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
     }
 }

@@ -19,7 +19,7 @@
         tools:ignore="MissingConstraints">
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/textDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -30,7 +30,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/paymentMethodText"
+            android:id="@+id/textDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -41,7 +41,7 @@
             android:textSize="14sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/trufiText"
+            android:id="@+id/textDetails"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="120dp"
@@ -54,7 +54,7 @@
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/amountText"
+            android:id="@+id/textAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|right"
