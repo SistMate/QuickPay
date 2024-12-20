@@ -73,7 +73,6 @@ class Transacciones_Pasajero : AppCompatActivity() {
             goToCanjear()
         }
 
-
     }
 
     private fun getUserName() {
