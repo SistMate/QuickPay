@@ -176,13 +176,13 @@ class MainActivity : AppCompatActivity() {
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        // Enviar enlace de recuperación de contraseña
+
                         sendPasswordResetEmail(email)
 
-                        // Generar una nueva contraseña aleatoria
+
                         val newPassword = generateRandomPassword()
 
-                        // Enviar el correo con la nueva contraseña
+
                         sendEmail(email, newPassword)
                     } else {
                         Toast.makeText(this@MainActivity, "El correo electrónico no está registrado.", Toast.LENGTH_LONG).show()

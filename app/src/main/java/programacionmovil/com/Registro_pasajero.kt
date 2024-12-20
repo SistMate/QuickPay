@@ -58,7 +58,7 @@ class Registro_pasajero : AppCompatActivity() {
             goToAtras()
         }
 
-        // Configurar el DatePickerDialog
+
         val textViewDate = findViewById<TextView>(R.id.textViewDate)
         val imageViewIconDate = findViewById<ImageView>(R.id.imageViewIconDate)
 

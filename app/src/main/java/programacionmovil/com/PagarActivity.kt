@@ -36,7 +36,7 @@ class PagarActivity : AppCompatActivity() {
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
-        // Verifica si hay una sesión activa
+
         if (mAuth.currentUser == null) {
             // Si no hay sesión activa, redirigir a MainActivity
             val intent = Intent(this, MainActivity::class.java)
@@ -44,7 +44,7 @@ class PagarActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Botón de Cerrar Sesión
+
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         btnLogout.setOnClickListener {
             mAuth.signOut()
@@ -52,7 +52,7 @@ class PagarActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
-        // Inicializar los ImageViews
+
         imageViewHome = findViewById(R.id.imageHome)
         imageViewPagar = findViewById(R.id.imageViewPagar)
         imageViewTransaction = findViewById(R.id.imageViewTransaction)
@@ -78,7 +78,6 @@ class PagarActivity : AppCompatActivity() {
         // Callback para el botón "Atrás"
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // Evitar que el usuario cierre sesión presionando el botón "Atrás"
                 moveTaskToBack(true)
             }
         })

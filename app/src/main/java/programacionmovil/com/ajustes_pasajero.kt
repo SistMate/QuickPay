@@ -2,11 +2,16 @@ package programacionmovil.com
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.text.InputType
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -48,7 +53,7 @@ class ajustes_pasajero : AppCompatActivity() {
 
 
         if (mAuth.currentUser == null) {
-            // Si no hay sesión activa, redirigir a MainActivity
+
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
@@ -80,21 +85,67 @@ class ajustes_pasajero : AppCompatActivity() {
         tvGoAdministracion.setOnClickListener {
             goToAdministracion()
         }
+        val tvCentroAyuda = findViewById<TextView>(R.id.tvCentroAyuda)
+        tvCentroAyuda.setOnClickListener { showHelpDialog() }
+        val tvAcercaDe = findViewById<TextView>(R.id.tvAcercaDe)
+        tvAcercaDe.setOnClickListener { showAboutDialog() }
 
+    }
+
+
+
+
+    private fun showAboutDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("Acerca de la Aplicación")
+
+        val scrollView = ScrollView(this)
+        val linearLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(16, 16, 16, 16)
+        }
+
+        val tvAboutText = TextView(this).apply {
+            text = """
+                QuickPay es una aplicación móvil diseñada para facilitar el pago de viajes en micros, trufis y otros transportes públicos. 
+                
+                Funcionalidades principales:
+                - **Pago mediante NFC**: Adquiere una tarjeta NFC, recárgala y paga fácilmente al chofer con un simple toque.
+                - **Recargas Rápidas**: Puedes recargar tu tarjeta NFC a través de la aplicación de manera rápida y segura.
+                - **Sistema de Puntos**: Por cada viaje que pagues, ganarás 1 punto. Acumula puntos suficientes y podrás canjearlos por recompensas.
+                
+                ¿Qué hace especial a QuickPay?
+                QuickPay no solo facilita los pagos, sino que también te recompensa por utilizarlos. Con nuestro sistema de puntos, cada viaje te acerca más a emocionantes recompensas.
+
+                ¡Únete a QuickPay y descubre una nueva forma de viajar en transporte público!
+            """.trimIndent()
+            setPadding(0, 16, 0, 16)
+        }
+
+        linearLayout.addView(tvAboutText)
+        scrollView.addView(linearLayout)
+        dialogBuilder.setView(scrollView)
+
+        dialogBuilder.setPositiveButton("Cerrar") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = dialogBuilder.create()
+        alertDialog.show()
     }
 
     private fun getUserName() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            // Obtén la referencia a la base de datos en Firebase (asegurándose de que la ruta sea la correcta)
-            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val myRef: DatabaseReference = database.getReference("Users")  // Usar "Users" en lugar de "usuarios"
 
-            // Recupera el nombre del usuario de la base de datos utilizando el UID del usuario
+            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val myRef: DatabaseReference = database.getReference("Users")
+
+
             val userId = user.uid
             myRef.child(userId).child("name").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // Recupera el nombre y lo convierte a mayúsculas antes de actualizar el TextView
+
                     val userName = dataSnapshot.getValue(String::class.java)?.toUpperCase() ?: "NOMBRE NO DISPONIBLE"
                     tvHeader.text = userName
                 }
@@ -109,7 +160,8 @@ class ajustes_pasajero : AppCompatActivity() {
         }
     }
 
-    // Método para mostrar alertas en caso de error
+
+
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -117,8 +169,64 @@ class ajustes_pasajero : AppCompatActivity() {
         builder.setPositiveButton("Aceptar", null)
         val dialog: AlertDialog = builder.create()
         dialog.show()
+
     }
-    private fun goToCanjeo(){
+
+    private fun showHelpDialog() {
+        val dialogBuilder = AlertDialog.Builder(this)
+        dialogBuilder.setTitle("Centro de Ayuda")
+
+
+        val linearLayout = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(16, 16, 16, 16)
+        }
+
+        val etEmailSubject = EditText(this).apply {
+            hint = "Asunto del correo"
+            setText("Solicitud de Ayuda")
+        }
+
+        val etEmailDescription = EditText(this).apply {
+            hint = "Descripción"
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_LONG_MESSAGE
+            setLines(4)
+            setText("Describe brevemente tu problema o consulta")
+        }
+
+        linearLayout.addView(etEmailSubject)
+        linearLayout.addView(etEmailDescription)
+
+        dialogBuilder.setView(linearLayout)
+        dialogBuilder.setPositiveButton("Enviar") { dialog, _ ->
+            val subject = etEmailSubject.text.toString().trim()
+            val description = etEmailDescription.text.toString().trim()
+            sendEmail("quickpaycbba@gmail.com", subject, description)
+            dialog.dismiss()
+        }
+        dialogBuilder.setNegativeButton("Cancelar") { dialog, _ ->
+            dialog.dismiss()
+        }
+        val alertDialog = dialogBuilder.create()
+        alertDialog.show()
+    }
+
+    private fun sendEmail(to: String, subject: String, body: String) {
+        val intent = Intent(Intent.ACTION_SENDTO).apply {
+            data = Uri.parse("mailto:")
+            putExtra(Intent.EXTRA_EMAIL, arrayOf(to))
+            putExtra(Intent.EXTRA_SUBJECT, subject)
+            putExtra(Intent.EXTRA_TEXT, body)
+        }
+        if (intent.resolveActivity(packageManager) != null) {
+            startActivity(intent)
+        } else {
+            Toast.makeText(this, "No hay aplicaciones de correo instaladas.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+private fun goToCanjeo(){
 
         val i = Intent(this, CanjeoPuntos::class.java)
         startActivity(i)

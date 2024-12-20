@@ -1,5 +1,6 @@
 package programacionmovil.com
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -28,22 +29,21 @@ class Transacciones_Pasajero : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_transacciones_pasajero)
 
-        // Configuración para ajustar la visualización con el borde de la pantalla
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicializa el TextView que mostrará el nombre del usuario
         tvHeader = findViewById(R.id.tvHeader)
 
-        // Llamar a la función para obtener el nombre del usuario desde Firebase
+
         getUserName()
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
-// Verifica si hay una sesión activa
+
         if (mAuth.currentUser == null) {
             // Si no hay sesión activa, redirigir a MainActivity
             val intent = Intent(this, MainActivity::class.java)
@@ -51,7 +51,7 @@ class Transacciones_Pasajero : AppCompatActivity() {
             startActivity(intent)
         }
 
-// Botón de Cerrar Sesión
+
         val btnLogout = findViewById<Button>(R.id.btnLogout)
         btnLogout.setOnClickListener {
             mAuth.signOut()
@@ -78,15 +78,14 @@ class Transacciones_Pasajero : AppCompatActivity() {
     private fun getUserName() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            // Obtén la referencia a la base de datos en Firebase (asegurándose de que la ruta sea la correcta)
-            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val myRef: DatabaseReference = database.getReference("Users")  // Usar "Users" en lugar de "usuarios"
 
-            // Recupera el nombre del usuario de la base de datos utilizando el UID del usuario
+            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val myRef: DatabaseReference = database.getReference("Users")
+
             val userId = user.uid
             myRef.child(userId).child("name").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // Recupera el nombre y lo convierte a mayúsculas antes de actualizar el TextView
+
                     val userName = dataSnapshot.getValue(String::class.java)?.toUpperCase() ?: "NOMBRE NO DISPONIBLE"
                     tvHeader.text = userName
                 }
@@ -101,7 +100,7 @@ class Transacciones_Pasajero : AppCompatActivity() {
         }
     }
 
-    // Método para mostrar alertas en caso de error
+
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -113,7 +112,7 @@ class Transacciones_Pasajero : AppCompatActivity() {
 
     private fun goToAjustes(){
 
-        val i = Intent(this, ajustes_pasajero::class.java)
+        val i = Intent(this,ajustes_pasajero::class.java)
         startActivity(i)
     }
     private fun goToHome(){

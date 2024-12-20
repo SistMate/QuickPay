@@ -1,5 +1,6 @@
 package programacionmovil.com
 
+
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -31,30 +32,30 @@ class HomePageP : AppCompatActivity() {
         setContentView(R.layout.activity_home_page_p)
 
 
-        // Configuración para ajustar la visualización con el borde de la pantalla
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        // Inicializa el TextView que mostrará el nombre del usuario
+
         tvHeader = findViewById(R.id.tvHeader)
-        tvMonto = findViewById(R.id.tvMontoTotal) // Asocia el TextView de monto
+        tvMonto = findViewById(R.id.tvMontoTotal)
         tvPuntos = findViewById(R.id.tvPuntos)
 
 
-        // Llamar a la función para obtener el nombre del usuario desde Firebase
+
         getUserName()
         getUserData()
-       // getUserTransacciones()
+
 
         mAuth = FirebaseAuth.getInstance()
         mDatabase = FirebaseDatabase.getInstance().reference
 
-// Verifica si hay una sesión activa
+
         if (mAuth.currentUser == null) {
-            // Si no hay sesión activa, redirigir a MainActivity
+
             val intent = Intent(this, MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
@@ -82,21 +83,21 @@ class HomePageP : AppCompatActivity() {
     private fun getUserName() {
         val user = FirebaseAuth.getInstance().currentUser
         if (user != null) {
-            // Obtén la referencia a la base de datos en Firebase (asegurándose de que la ruta sea la correcta)
-            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val myRef: DatabaseReference = database.getReference("Users")  // Usar "Users" en lugar de "usuarios"
 
-            // Recupera el nombre del usuario de la base de datos utilizando el UID del usuario
+            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val myRef: DatabaseReference = database.getReference("Users")
+
+
             val userId = user.uid
             myRef.child(userId).child("name").addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // Recupera el nombre y lo convierte a mayúsculas antes de actualizar el TextView
+
                     val userName = dataSnapshot.getValue(String::class.java)?.toUpperCase() ?: "NOMBRE NO DISPONIBLE"
                     tvHeader.text = userName
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    // Maneja el error si ocurre
+
                     showAlert("Error al obtener el nombre del usuario")
                 }
             })
@@ -114,13 +115,13 @@ class HomePageP : AppCompatActivity() {
 
             myRef.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // Recupera los datos de crédito y puntos acumulados
+
                     val monto = dataSnapshot.child("monto").getValue(Int::class.java) ?: 0
                     val puntos = dataSnapshot.child("puntosAcumulados").getValue(Int::class.java) ?: 0
 
-                    // Actualiza los TextView con los valores obtenidos
+
                     tvMonto.text = "$monto Bs."
-                    tvPuntos.text = "$puntos Pts." // Añadir " Pts." al final de los puntos
+                    tvPuntos.text = "$puntos Pts."
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
@@ -134,7 +135,7 @@ class HomePageP : AppCompatActivity() {
 
 
 
-    // Método para mostrar alertas en caso de error
+
     private fun showAlert(message: String) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Error")
@@ -163,38 +164,6 @@ class HomePageP : AppCompatActivity() {
         val i = Intent(this, CanjeoPuntos::class.java)
         startActivity(i)
     }
-    /*private fun getUserTransacciones() {
-        val user = FirebaseAuth.getInstance().currentUser
-        if (user != null) {
-            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val myRef: DatabaseReference = database.getReference("Users")
-            val userId = user.uid
 
-            myRef.child(userId).child("transacciones").addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val transaccionesList = mutableListOf<String>()
-
-                    for (transaccionSnapshot in dataSnapshot.children) {
-                        val monto = transaccionSnapshot.child("monto").getValue(Int::class.java) ?: 0
-                        val fecha = transaccionSnapshot.child("fecha").getValue(String::class.java) ?: "Fecha no disponible"
-                        val descripcion = transaccionSnapshot.child("descripcion").getValue(String::class.java) ?: "Descripción no disponible"
-                        val transaccionInfo = "Monto: $monto Bs, Fecha: $fecha, Descripción: $descripcion"
-                        transaccionesList.add(transaccionInfo)
-                    }
-
-                    // Si estás usando RecyclerView
-                    val recyclerView = findViewById<RecyclerView>(R.id.recyclerViewTransacciones)
-                    val adapter = TransaccionesAdapter(transaccionesList)
-                    recyclerView.adapter = adapter
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                    showAlert("Error al obtener las transacciones: ${databaseError.message}")
-                }
-            })
-        } else {
-            showAlert("Usuario no autenticado")
-        }
-    }*/
 
 }

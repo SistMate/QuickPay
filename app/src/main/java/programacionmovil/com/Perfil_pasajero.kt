@@ -97,7 +97,7 @@ class Perfil_pasajero : AppCompatActivity() {
             datePickerDialog.datePicker.maxDate = eighteenYearsAgo.timeInMillis
             datePickerDialog.show()
         }
-        // Configurar el botón de cambiar contraseña
+
         val changePasswordButton = findViewById<Button>(R.id.btn_change_password)
         changePasswordButton.setOnClickListener {
             showChangePasswordDialog()
@@ -162,13 +162,13 @@ class Perfil_pasajero : AppCompatActivity() {
             val newFechaNacimiento = fechaNacimientoEditText.text.toString()
             val newCelular = numeroCelularEditText.text.toString()
 
-            // Validación de número de celular (debe tener 8 dígitos)
+
             if (newCelular.length != 8) {
                 Toast.makeText(this, "El número de celular debe tener 8 dígitos.", Toast.LENGTH_SHORT).show()
                 return
             }
 
-            // Validación de cédula (debe tener entre 7 y 8 dígitos)
+
             if (newCi.length !in 7..8) {
                 Toast.makeText(this, "La cédula debe tener entre 7 y 8 dígitos.", Toast.LENGTH_SHORT).show()
                 return
@@ -249,7 +249,7 @@ class Perfil_pasajero : AppCompatActivity() {
                     val fechaNacimiento = snapshot.child("fechaNacimiento").value?.toString()
                     val celular = snapshot.child("celular").value?.toString()
 
-                    // Llamar al callback y pasar los datos recuperados
+
                     onDataLoaded(name, email, ci, fechaNacimiento, celular)
                     ciEditText.setText(ci ?: "")
                     fechaNacimientoEditText.setText(fechaNacimiento ?: "")
@@ -265,9 +265,9 @@ class Perfil_pasajero : AppCompatActivity() {
         }
     }
 
-    // Método para mostrar el AlertDialog de cambio de contraseña
+
     private fun showChangePasswordDialog() {
-        // Crear EditText para la contraseña actual y la nueva
+
         val currentPasswordEditText = EditText(this)
         currentPasswordEditText.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
         currentPasswordEditText.hint = "Contraseña actual"
@@ -293,10 +293,10 @@ class Perfil_pasajero : AppCompatActivity() {
                 if (currentPassword.isEmpty() || newPassword.isEmpty()) {
                     Toast.makeText(this, "Por favor ingrese ambas contraseñas", Toast.LENGTH_SHORT).show()
                 } else if (newPassword.length < 6) {
-                    // Verificar que la nueva contraseña tenga al menos 6 caracteres
+
                     Toast.makeText(this, "La nueva contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show()
                 } else {
-                    // Verificar la contraseña actual y cambiarla
+
                     changePassword(currentPassword, newPassword)
                 }
             }
@@ -306,18 +306,16 @@ class Perfil_pasajero : AppCompatActivity() {
         dialog.show()
     }
 
-    // Método para cambiar la contraseña en Firebase
-    // Método para cambiar la contraseña en Firebase
     private fun changePassword(currentPassword: String, newPassword: String) {
         val user = mAuth.currentUser
 
-        // Primero, volvemos a autenticar al usuario con la contraseña actual
+
         val credential = EmailAuthProvider.getCredential(user!!.email!!, currentPassword)
 
         user.reauthenticate(credential)
             .addOnCompleteListener { reauthenticateTask ->
                 if (reauthenticateTask.isSuccessful) {
-                    // Contraseña actual es correcta, ahora cambiamos la contraseña
+
                     user.updatePassword(newPassword)
                         .addOnCompleteListener { updateTask ->
                             if (updateTask.isSuccessful) {
